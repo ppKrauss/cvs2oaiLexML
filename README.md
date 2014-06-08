@@ -1,16 +1,20 @@
 isis2oaile
 ==========
 
-*"ISIS TO OAI-Lex"*, conversão de arquivos CSV de saída ISIS (da Câmara Municipal de São Paulo) para OAI-LexML.
+*"CVS TO OAI-LexML"*, conversão de arquivos CSV (planilha) para OAI-LexML.
 
 # Apresentação #
-Os procedimentos e algoritmos descritos a seguir, tem por objetivo garantir a reprodução fiel dos metadados do portal da Câmara Municipal de São Paulo, http://www.camara.sp.gov.br, no [portal LexML](http://www.lexml.gov.br/). 
+
+Os procedimentos e algoritmos descritos a seguir, tem por objetivo garantir a conversão fiel dos metadados das normas jurídicas de um municipio  (Leis, Decretos, Portarias, etc.), quando dispostos em arquivo [CVS](https://en.wikipedia.org/wiki/Comma-separated_values), para o formato [OAI-LexML](http://projeto.lexml.gov.br/esquemas/oai_lexml.xsd); e, opcionalmente, para uma base de dados passível de ser validada pelo [software do "kit provedor de dados"](http://projeto.lexml.gov.br/documentacao/LexML_Brasil-Parte_4a-Kit_Provedor_de_Dados%20v.pdf).  
+
+Historicamente dois exemplos típicos caracterizam o problema em contextos bem distintos:
+* Prefeitura Municipal de Garuva (SC): em 3.974
+
+07/07/2010 - O LexML Brasil é uma Rede de Informação Jurídica e Legislativa que tem por ... A digitalização de todas as leis foi realizada pela equipe do ...
+tais como a saída ISIS do portal da Câmara Municipal de São Paulo, http://www.camara.sp.gov.br, no [portal LexML](http://www.lexml.gov.br/). 
 
 O [projeto LexML](http://projeto.lexml.gov.br/) é uma das mais importantes iniciativas de transparência e interoperabilidade no Brasil.
 Nele foi estabelecido um protocolo para a coleta de metadados de normas jurídicas brasileiras (Leis, Decretos, Portarias, etc.), com base no Protocolo [OAI-PMH](https://pt.wikipedia.org/wiki/OAI-PMH) (*Open Archives Information – Protocol for Metadata Harvest*), descrito na norma "[LexML Brasil - Parte 4 – Coleta de Metadados](http://projeto.lexml.gov.br/documentacao/Parte-4-Coleta-de-Metadados.pdf)", e com formato fixado por 
-
-> http://projeto.lexml.gov.br/esquemas/oai_lexml.xsd
-
 ## Exemplo ilustrativo 
 
 Apesar do ISIS permitir as mais diversas formas de saída em text/plain, foi escolhida uma variação específica do CSV já usado no "[Programa de Dados Abertos do Parlamento](http://www.camara.sp.gov.br/index.php?option=com_wrapper&view=wrapper&Itemid=219) (vide Portal da Câmara Municipal de São Paulo, seção Transparência/Dados Abertos),  arquivo "Produção Legislativa", descrito em [ARQ_BIBL.TXT](http://www2.camara.sp.gov.br/Dados_abertos/producaoLegislativa/ARQ_BIBL.TXT).
@@ -45,8 +49,9 @@ Também optou-se por não realizar armazenamento e análise intermediário, mas 
 # Procedimentos
 
   1. Obter arquivo completo e atualizado da base ISIS (pode resultar em dezenas Mb). Supor `dump.txt`
-  2. rodar `php isis2oailex.php < dump.txt > dump.xml`
-  3. Encaminhar `dump.xml.zip` ao LexML.
+  2. rodar `php isis2oailex.php < dump.txt 
+  3. avaliar na base de dados
+  4. rodar o "kit provedor de dados" 
 
 # Descrição do algoritmo
 
@@ -58,6 +63,8 @@ Temos aparentemente dois softwares de processamento, um em PHP outro em XSLT1, m
 
 # Outros links e referências 
 
+* [Software complexo do "kit provedor de dados"](http://projeto.lexml.gov.br/documentacao/LexML_Brasil-Parte_4a-Kit_Provedor_de_Dados%20v.pdf) 
+* Outro [software de onde pode-se resgatar talvez detalhes como "montagem da epigrafe"](http://sapl.googlecode.com/svn/trunk/SAPLTool.py)
 * [projeto LexML na Wikipedia](https://pt.wikipedia.org/wiki/LexML_Brasil) 
 * ...
 * ...
