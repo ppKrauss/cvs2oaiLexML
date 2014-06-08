@@ -3,7 +3,6 @@ isis2oaile
 
 *"ISIS TO OAI-Lex"*, conversão de arquivos CSV de saída ISIS (da Câmara Municipal de São Paulo) para OAI-LexML.
 
-
 # Apresentação #
 Os procedimentos e algoritmos descritos a seguir, tem por objetivo garantir a reprodução fiel dos metadados do portal da Câmara Municipal de São Paulo, http://www.camara.sp.gov.br, no [portal LexML](http://www.lexml.gov.br/). 
 
@@ -16,7 +15,7 @@ Nele foi estabelecido um protocolo para a coleta de metadados de normas jurídic
 
 Apesar do ISIS permitir as mais diversas formas de saída em text/plain, foi escolhida uma variação específica do CSV já usado no "[Programa de Dados Abertos do Parlamento](http://www.camara.sp.gov.br/index.php?option=com_wrapper&view=wrapper&Itemid=219) (vide Portal da Câmara Municipal de São Paulo, seção Transparência/Dados Abertos),  arquivo "Produção Legislativa", descrito em [ARQ_BIBL.TXT](http://www2.camara.sp.gov.br/Dados_abertos/producaoLegislativa/ARQ_BIBL.TXT).
 
-Como é uma convenção que ainda pode sofrer modificações, podemos avaliar um caso simplificado,
+Como esse *dump ISIS* é uma convenção que ainda pode sofrer modificações, podemos avaliar um caso simplificado,
 
       TEXTO_NORMA;TIPO_NORMA;NUMERO_NORMA;DATA_NORMA;SITUACAO;EMENTA;DATA_PUBL_rep
 
@@ -29,7 +28,13 @@ Vejamos uma sequência de três normas,
       L16008;Lei;16.008;05/06/2014;1;Dispõe sobre o reajustamento dos ... Profissionais de Educação.;PL;235;2014;
       AC127514;Ato da CMSP;1.275;05/06/2014;1;Abre Crédito Adicional Suplementar de R$ 6.000.000,00 de acordo com a Lei nº 15.950/2013.;
       
-Elas podem primeiramente ser transformadas num XML arbitrário através de ferramentas simples, como o [awk](https://pt.wikipedia.org/wiki/Awk):
+O primeiro campo, `TEXTO_NORMA`, contém o nome de arquivo usado no portal. Por exemplo a "Resolução 1 de 1982" está no arquivo `R0001-1892.pdf`, atualmente disponível na URL,
+
+     http://camaramunicipalsp.qaplaweb.com.br/iah/fulltext/resolucoes/R0001-1892.pdf
+
+Os demais campos são justamente os metadados requisitaodos pelo LexML.
+
+O *dump ISIS* pode primeiramente ser transformadas num XML arbitrário através de ferramentas simples, como o [awk](https://pt.wikipedia.org/wiki/Awk):
 
      awk -F: 'BEGIN{FS=";"}{print "<item><arq>"$1"</arq><tipo>"$2"</tipo><num>"$3"</num><data>"$4"</data><ementa>"$6"</ementa></item>"}' < listaIsis.txt > listaItens.xml
 
@@ -37,11 +42,19 @@ Todavia, como o trabalho de conversão requer uma linguagem mais robusta, como P
 
 Também optou-se por não realizar armazenamento e análise intermediário, mas apenas efetuar a conversão, apenas "empacotar os dados".
 
-# Procedimentos de preparo
-...
+# Procedimentos
 
-# Rotina de atualização
-...
+  1. Obter arquivo completo e atualizado da base ISIS (pode resultar em dezenas Mb). Supor `dump.txt`
+  2. rodar `php isis2oailex.php < dump.txt > dump.xml`
+  3. Encaminhar `dump.xml.zip` ao LexML.
+
+# Descrição do algoritmo
+
+Conforme exemplificado pela linha `awk` acima, a etapa mais simples é a transformação do arquivo CSV em XML. Todavia, para a obtenção de todos os metadados é necessário acessar campos do ISIS que se encontram codificados com sinais de "<" e ">", e com subcampos separados por "%". Assim algumas filtragens de string são necessárias.
+
+Esse primeiro XML, denominado *formato intermediário* se presta apenas para a submissão dos dados a uma [transformação XSLT](https://en.wikipedia.org/wiki/XSLT), ou seja,  a um parser expresso por linguagem padronizada. Como uma alternativa ao pré-parsing é o tratamento de strings através do próprio XSLT, mas o XSLT1 (padrão de 1999 menos expressivo que o XSLT2 porém mais leve e mais difundido)  optamos por usar [XSLT1 com registerFunctions](https://en.wikibooks.org/wiki/PHP_Programming/XSL/registerPHPFunctions), tudo em ambiente PHP. 
+
+Temos aparentemente dois softwares de processamento, um em PHP outro em XSLT1, mas o *core* está no arquivo `isis2oailex.xsl`, que se encontra documentado, e, por ser uma linguagem funcional, é praticamente auto-explicativo.
 
 # Outros links e referências 
 
