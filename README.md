@@ -1,5 +1,5 @@
-isis2oaile
-==========
+cvs2oaiLexML
+============
 
 *"CVS TO OAI-LexML"*, conversão de arquivos CSV (planilha) para OAI-LexML.
 
