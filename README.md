@@ -49,7 +49,7 @@ O *dump ISIS* pode primeiramente ser transformadas num XML arbitrário através 
 
 Todavia, como o trabalho de conversão requer uma linguagem mais robusta, como Perl, Python ou PHP, optou-se por expressar todo o algoritmo dentro da mesma linguagem, sem pipes ou processos intermediários.
 
-Também optou-se por não realizar armazenamento e análise intermediário, mas apenas efetuar a conversão, apenas "empacotar os dados".
+Também optou-se por não realizar armazenamento e análise intermediários, mas apenas "empacotar os dados".
 
 ----
 
@@ -61,13 +61,14 @@ Esse primeiro XML, denominado *formato intermediário* se presta apenas para a s
 
 Temos aparentemente dois softwares de processamento, um em PHP outro em XSLT1, mas o *core* está no arquivo `isis2oailex.xsl`, que se encontra documentado, e, por ser uma linguagem funcional, é praticamente auto-explicativo.
 
-## Convenções 
+# Convenções sugeridas e adotadas
+Duas convenções principais foram fixadas, como proposta às prefeituras: 
+ 1. Recupoeração de dados brutos do município: através da classe [getcsv_stdOpenGov](https://github.com/ppKrauss/getcsv_stdOpenGov), onde podemos fixar parte das convenções, tais nomes dos campos relativos aos metadados das normas. Foi requisitado também dispor o CVS em UTF-8 com primeira linha contendo os nomes de campo.
+ 2. XML intermediário (baseado nos nomes dos campos convencionados no item anterior).
 
-Quando a primeira linha não possuir nenhum campo numérico ela será ignorada, tal qual uma linha em branco, exceto se for a primeira linha, onde seus conteúdos podem ser interpretados como nomes das tags relativas a cada coluna do CSV. Em regular expression PCRE pode-se afirmar que:
+ Além das convenções para a recuperação de dados brutos, foram sugeridas convenções para a Câmara no sentido de oferecer ao público URLs mais consistentes e perenes, usando ao invés do domínio "camaramunicipalsp.qaplaweb.com.br", o domínio "www.camara.sp.gov.br" na exposição dos PDFs e demais conteúdos normativos originais.
 
-
-* se a linha contém a sequência "separador dígitos separador", por exemplo `/#[0-9]+#/`, ela é uma linha de dados
-* senão ela é ignorada, exceto se for a primeira linha, onde, não sendo em branco, será considerada lista dos nomes de campo e das tags
+## XML intermediário
 
 Apenas os seguintes nomes de campo podem ser utilizados na primeira linha:
 * arq: nome de arquivo ou indentificador da norma
@@ -78,6 +79,14 @@ Apenas os seguintes nomes de campo podem ser utilizados na primeira linha:
 * ementa: ementa da norma
 * dataPub: data de publicação no Diário Oficial do Município
 ... nenhum outro nome é válido (alterar o presente documento se precisar).
+
+## Opções de transferência
+... XML final para SQL ou XML ...
+
+## Projetos de Lei
+O LexML, apesar de priorizar as normas, aceita também "projetos de norma". Por exemplo o projeto [PL-2788 (urn:lex:br:camara.deputados:projeto.lei;pl:2011;2788)](http://www.lexml.gov.br/urn/urn:lex:br:camara.deputados:projeto.lei;pl:2011;2788) já devidamente registrado, que deu origem à [Lei 11705 (urn:lex:br:federal:lei:2008;11705)](http://www.lexml.gov.br/urn/urn:lex:br:federal:lei:2008-06-19;11705). Para expresar esse relacionamento, os metadados devem incluir uma tag `<Relacionamento tipo="sucessor.logico.de">` com a URN do projeto de lei.
+
+----
 
 # Outros links e referências 
 * https://github.com/lexml/
