@@ -36,14 +36,18 @@ function printERR($msg) {
 	file_put_contents('php://stderr', "$msg\n");	
 }
 
-function XSL_transf($xml,$xslfile) {
+/**
+ * Efetua a transformação isis-to-OAI e as filtragens de campos. 
+ */
+function XSL_transf($xml,$xslfile='isis2oailex.xsl') {
 	$xmldoc = DOMDocument::loadXML($xml);
 	$xsldoc = DOMDocument::load($xslfile);
+	// altera atributo do root (garantidamente elemento "xsl:transform")
+	$xsldoc->documentElement->setAttribute('xmlns:fn','http://php.net/xsl');
 	$proc = new XSLTProcessor();
 	$proc->registerPHPFunctions();
 	$proc->importStyleSheet($xsldoc);
 	echo $proc->transformToXML($xmldoc);
 }
-
 
 ?>

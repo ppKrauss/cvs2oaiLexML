@@ -62,11 +62,13 @@ Esse primeiro XML, denominado *formato intermediário* se presta apenas para a s
 Temos aparentemente dois softwares de processamento, um em PHP outro em XSLT1, mas o *core* está no arquivo `isis2oailex.xsl`, que se encontra documentado, e, por ser uma linguagem funcional, é praticamente auto-explicativo.
 
 # Convenções sugeridas e adotadas
-Duas convenções principais foram fixadas, como proposta às prefeituras: 
+Duas convenções principais foram fixadas, como proposta às prefeituras:
+
  1. Recupoeração de dados brutos do município: através da classe [getcsv_stdOpenGov](https://github.com/ppKrauss/getcsv_stdOpenGov), onde podemos fixar parte das convenções, tais nomes dos campos relativos aos metadados das normas. Foi requisitado também dispor o CVS em UTF-8 com primeira linha contendo os nomes de campo.
+
  2. XML intermediário (baseado nos nomes dos campos convencionados no item anterior).
 
- Além das convenções para a recuperação de dados brutos, foram sugeridas convenções para a Câmara no sentido de oferecer ao público URLs mais consistentes e perenes, usando ao invés do domínio "camaramunicipalsp.qaplaweb.com.br", o domínio "www.camara.sp.gov.br" na exposição dos PDFs e demais conteúdos normativos originais.
+Além das convenções para a recuperação de dados brutos, foram sugeridas convenções para a Câmara no sentido de oferecer ao público URLs mais consistentes e perenes, usando ao invés do domínio "camaramunicipalsp.qaplaweb.com.br", o domínio "www.camara.sp.gov.br" na exposição dos PDFs e demais conteúdos normativos originais.
 
 ## XML intermediário
 
@@ -84,7 +86,7 @@ Apenas os seguintes nomes de campo podem ser utilizados na primeira linha:
 ... XML final para SQL ou XML ...
 
 ## Projetos de Lei
-O LexML, apesar de priorizar as normas, aceita também "projetos de norma". Por exemplo o projeto [PL-2788 (urn:lex:br:camara.deputados:projeto.lei;pl:2011;2788)](http://www.lexml.gov.br/urn/urn:lex:br:camara.deputados:projeto.lei;pl:2011;2788) já devidamente registrado, que deu origem à [Lei 11705 (urn:lex:br:federal:lei:2008;11705)](http://www.lexml.gov.br/urn/urn:lex:br:federal:lei:2008-06-19;11705). Para expresar esse relacionamento, os metadados devem incluir uma tag `<Relacionamento tipo="sucessor.logico.de">` com a URN do projeto de lei.
+O LexML, apesar de priorizar as normas, aceita também "projetos de norma". Por exemplo o projeto [PL-2788 (urn:lex:br:camara.deputados:projeto.lei;pl:2011;2788)](http://www.lexml.gov.br/urn/urn:lex:br:camara.deputados:projeto.lei;pl:2011;2788) já devidamente registrado, que deu origem à [Lei 11705 (urn:lex:br:federal:lei:2008;11705)](http://www.lexml.gov.br/urn/urn:lex:br:federal:lei:2008-06-19;11705). Para expresar esse relacionamento, os metadados da Lei 11705 devem incluir uma tag `<Relacionamento tipo="sucessor.logico.de">` com a URN do projeto de lei.
 
 ----
 
