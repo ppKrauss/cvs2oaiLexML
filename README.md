@@ -6,8 +6,20 @@ cvs2oaiLexML
 # Sinopse dos procedimentos
 
   1. Obter arquivo completo e atualizado da base ISIS (pode resultar em dezenas Mb). Supor `dump.txt`
-  2. configurar e rodar `php isis2oailex.php < dump.txt`
-  3. configurar e rodar o "kit provedor de dados": ver  [lexml-toolkit](https://github.com/lexml/lexml-toolkit), [lexml-coleta-validador](https://github.com/lexml/lexml-coleta-validador) e [seu guia](http://projeto.lexml.gov.br/documentacao/LexML_Brasil-Parte_4a-Kit_Provedor_de_Dados%20v.pdf).
+  2. configurar e rodar `php isis2oailex.php > metadadosLexML.xml`
+  3. enviar para análise ao suporte LeXML ou configurar e rodar o "kit provedor de dados": ver  [lexml-toolkit](https://github.com/lexml/lexml-toolkit), [lexml-coleta-validador](https://github.com/lexml/lexml-coleta-validador) e [seu guia](http://projeto.lexml.gov.br/documentacao/LexML_Brasil-Parte_4a-Kit_Provedor_de_Dados%20v.pdf).
+
+# DECISÔES DE PROJETO EM 2014-06-11 n
+
+AGUARDAR DEFINIÇÕES:
+
+ * Ainda não recebemos o arquivo completo de normas vigentes, apenas o de Projetos de normas.
+ * A prefeitura não se cadastrou junto ao LexML, o tempo é muito curto, precisa aguardar processo.
+
+SIMPLIFICANDO para não desperdiçar tempo em algo que ainda não sabemos se será usado: 
+ * simplificação geral do software...
+ * nada de generalização ou colaboração com similares. 
+ * usando só com o arquivo fornecido, de PROJETOS DE NORMAS
 
 # Apresentação #
 
