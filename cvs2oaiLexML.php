@@ -2,52 +2,79 @@
 /**
  * "CVS to OAI-LexML", conversão de arquivos CSV genéricos (tabular plain text independente do separador) para OAI-LexML.
  * v1.0-2014-06-08 of https://github.com/ppKrauss/cvs2oaiLexML 
- * Usar em modo shell:
- * % php cvs2oaiLexML.php | more
- * % php cvs2oaiLexML.php lex1-isis1 <metadataIsis.txt > metadataLexml.xml
+ * Usar em modo terminal:
+ * % php cvs2oaiLexML.php > arquivo.xml
  */
 
-/* ... DECISÕES DE PROJETO:
-  Fixando convenções e recuperando dados brutos através de 
-  https://github.com/ppKrauss/getcsv_stdOpenGov
 
-  Avaliando se PHP está online ou no terminal, e pegando options por $_GET ou por
-   http://www.php.net/manual/en/function.getopt.php
+// // // // // // // // //
+// CONFIGURAR COM ATENCAO:
+	$CHARSET = 'UTF-8'; // MUDAR PARA ISO SE PRECISAR, O CORRETO E-PING É OFERECER TXT UTF8
+	$FILE = 'ARQ_BIBL.TXT';
+	$nmax = 0;   // usar por ex. 100 para teste.
+// FIM CONFIGS
 
-  Filtragem de dados dentro do getcsv_stdOpenGov: apenas para split de subcampos em arrays, vide convenções lex1-isis1.
-  Filtragem final: com as registered functions no XSLT final (lembrando de usar namespace "fn" no lugar de "php" pois o XSLT pode ser reusado com Python, etc.)
-  Reconstrução de dados: aparentemente o epigrafe (titulo da norma) não é oferecido, seria construido em função externa via data e numero.
-  Validação: teste das URLs e verificação de consistencia (via regex) de epigrafe com codigo e data, etc. Posteriori, como sugerido no uso do kit LexML.
 
-*/
+$h = fopen($FILE,'r');
+$FC = array('tipo','numero','data','promovente','ementa','assunto','tipo_promulgacao','numero_promulgacao','data_promulgacao','','','','','','','','','','','');
+	//       0      1        2      ..
+$tipos = array(
+	'PL'=>'Projeto de Lei',
+	'PDL'=>'Projeto de Decreto Legislativo',
+	'PLO'=>'Projeto de Emenda a Lei Orgânica',
+	'PR'=>'Projeto de Resolução',
+	'MOC'=>'Moção',
+	'RPP'=>'Requerimento P com Processo',
+	'RDP'=>'Requerimento D com Processo',
+	'IND'=>'Indicação',
+	'REC'=>'Recurso',
+	'RDS'=>'Requerimento D sem Processo',
+	'DOCREC'=>'Documento Recebido',
+);
 
-/**
- * Conversão do CSV de entrada para LexML.
- */
-function converter(
-		$in_config,  		// configurações ('sep'=separador, 'universo'=projetos ou normas, 'x-tipo'=função para executar sub-conversão de string)
-		&$out_handle,      	// handler do output
-		$out_mode='lines'   // lines=linhas XML sem root, xml=com root e header, sql=comando INSERT das linhas
-	) {
-	print "\nOK converteu\n";
-}
+$tipos_urn = array(
+	'PL' =>'projeto.lei',
+	'PDL'=>'projeto.decreto;legislativo',
+	'PLO'=>'projeto.emenda.lei.organica',
+	'PR' =>'projeto.resolucao',
+);
 
-function printERR($msg) {
-	file_put_contents('php://stderr', "$msg\n");	
-}
+$n=0;
+print  <<<EOB
+<?xml version="1.0" encoding="$CHARSET" standalone="yes" ?>
+<metadata>
+EOB;
 
-/**
- * Efetua a transformação isis-to-OAI e as filtragens de campos. 
- */
-function XSL_transf($xml,$xslfile='isis2oailex.xsl') {
-	$xmldoc = DOMDocument::loadXML($xml);
-	$xsldoc = DOMDocument::load($xslfile);
-	// altera atributo do root (garantidamente elemento "xsl:transform")
-	$xsldoc->documentElement->setAttribute('xmlns:fn','http://php.net/xsl');
-	$proc = new XSLTProcessor();
-	$proc->registerPHPFunctions();
-	$proc->importStyleSheet($xsldoc);
-	echo $proc->transformToXML($xmldoc);
-}
+while( !feof($h) && (!$nmax || $n<$nmax) ) {
+	$n++;
+	$lin = fgetcsv($h,0,'#'); // 0 ou max. length por performance
+	if (  $lin[1]>0 && !in_array($lin[0],array('IND','MOC','RPP','RDP','REC','RDS','DOCREC'))  ) {
+		if ( preg_match('|(\d\d)/(\d\d)/(\d\d\d\d)|',$lin[2],$m) )
+			$data_iso = "$m[3]-$m[2]-$m[1]";
+		else
+			$data_iso = $lin[2];
+
+		$ementa = str_replace('%'," ",$lin[4]);
+		$tipo = $lin[0];
+		$tipo_urn = $tipos_urn[$tipo];
+		$num = $lin[1];
+		$tipo_ext = $tipos[$tipo];
+		print  <<<EOB
+<LexML xmlns="http://www.lexml.gov.br/">
+	<Item formato="application/pdf">
+	http://camaramunicipalsp.qaplaweb.com.br/cgi-bin/wxis.bin/iah/scripts/?IsisScript=iah.xis&lang=pt&format=detalhado.pft&base=proje&form=A&nextAction=search&indexSearch=^nTw^lTodos%20os%20campos&exprSearch=P=$lin[0]$lin[1]
+	</Item>
+	<DocumentoIndividual>
+	urn:lex:br;sao.paulo;sao.paulo:municipal:$tipo_urn:$data_iso;$lin[1]
+	</DocumentoIndividual>
+	<Epigrafe>$tipo_ext núm. $num de $lin[2]</Epigrafe>
+	<Ementa>$ementa</Ementa>
+</LexML>
+EOB;
+
+	} // if valido
+} // loop file
+fclose($h);
+print "\n\n</metadata>\n";
 
 ?>

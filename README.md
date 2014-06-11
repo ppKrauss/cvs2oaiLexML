@@ -64,9 +64,10 @@ Temos aparentemente dois softwares de processamento, um em PHP outro em XSLT1, m
 # Convenções sugeridas e adotadas
 Duas convenções principais foram fixadas, como proposta às prefeituras:
 
- 1. Recupoeração de dados brutos do município: através da classe [getcsv_stdOpenGov](https://github.com/ppKrauss/getcsv_stdOpenGov), onde podemos fixar parte das convenções, tais nomes dos campos relativos aos metadados das normas. Foi requisitado também dispor o CVS em UTF-8 com primeira linha contendo os nomes de campo.
+  1. Recuperação de dados brutos do município: através da classe [getcsv_stdOpenGov](https://github.com/ppKrauss/getcsv_stdOpenGov), onde podemos fixar parte das convenções, tais como nomes dos campos relativos aos metadados das normas. Foi requisitado também dispor o CVS em UTF-8 com primeira linha contendo os nomes de campo.
 
- 2. XML intermediário (baseado nos nomes dos campos convencionados no item anterior).
+  2. XML intermediário (baseado nos nomes dos campos convencionados no item anterior).
+
 
 Além das convenções para a recuperação de dados brutos, foram sugeridas convenções para a Câmara no sentido de oferecer ao público URLs mais consistentes e perenes, usando ao invés do domínio "camaramunicipalsp.qaplaweb.com.br", o domínio "www.camara.sp.gov.br" na exposição dos PDFs e demais conteúdos normativos originais.
 
