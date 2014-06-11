@@ -10,6 +10,7 @@
 // CONFIGURAR COM ATENCAO:
 	$CHARSET = 'UTF-8'; // MUDAR PARA ISO SE PRECISAR, O CORRETO E-PING É OFERECER TXT UTF8
 	$FILE = 'ARQ_BIBL.TXT';
+	$URL_mime = 'application/pdf';  // ver tambem a $URL !
 	$nmax = 0;   // usar por ex. 100 para teste.
 // FIM CONFIGS
 
@@ -72,7 +73,7 @@ while( !feof($h) && (!$nmax || $n<$nmax) ) {
 		print  <<<EOB
 
 <LexML xmlns="http://www.lexml.gov.br/">
-	<Item formato="text/html">
+	<Item formato="$URL_mime">
 	$URL
 	</Item>
 	<DocumentoIndividual>
