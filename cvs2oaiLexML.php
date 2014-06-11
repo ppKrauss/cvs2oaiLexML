@@ -6,7 +6,6 @@
  * % php cvs2oaiLexML.php > arquivo.xml
  */
 
-
 // // // // // // // // //
 // CONFIGURAR COM ATENCAO:
 	$CHARSET = 'UTF-8'; // MUDAR PARA ISO SE PRECISAR, O CORRETO E-PING É OFERECER TXT UTF8
@@ -49,28 +48,41 @@ while( !feof($h) && (!$nmax || $n<$nmax) ) {
 	$n++;
 	$lin = fgetcsv($h,0,'#'); // 0 ou max. length por performance
 	if (  $lin[1]>0 && !in_array($lin[0],array('IND','MOC','RPP','RDP','REC','RDS','DOCREC'))  ) {
-		if ( preg_match('|(\d\d)/(\d\d)/(\d\d\d\d)|',$lin[2],$m) )
+		if ( preg_match('|(\d\d).(\d\d).(\d\d\d\d)|',$lin[2],$m) ) {
+			$ano=$m[3];
 			$data_iso = "$m[3]-$m[2]-$m[1]";
-		else
+		}else {
+			$ano='';
 			$data_iso = $lin[2];
+		}
 
-		$ementa = str_replace('%'," ",$lin[4]);
 		$tipo = $lin[0];
-		$tipo_urn = $tipos_urn[$tipo];
 		$num = $lin[1];
+		$tipo_urn = $tipos_urn[$tipo];
 		$tipo_ext = $tipos[$tipo];
+		$ementa = str_replace('%'," ",$lin[4]);
+
+		$num4 = str_pad($num,4,'0',STR_PAD_LEFT);
+		$URL = "http://camaramunicipalsp.qaplaweb.com.br/iah/fulltext/projeto/$tipo$num4-$ano.pdf";
+		// se precisar: $URL = str_replace('&','&amp;',$URL);
+		// se precisar: $RELACIONAMENTO="\n\t<Relacionamento tipo=\"sucessor.logico.de\">...</Relacionamento>";
+		//              mas depende de armazenamento temporário em hash ou base dados.
+		$RELACIONAMENTO='';
+
 		print  <<<EOB
+
 <LexML xmlns="http://www.lexml.gov.br/">
-	<Item formato="application/pdf">
-	http://camaramunicipalsp.qaplaweb.com.br/cgi-bin/wxis.bin/iah/scripts/?IsisScript=iah.xis&lang=pt&format=detalhado.pft&base=proje&form=A&nextAction=search&indexSearch=^nTw^lTodos%20os%20campos&exprSearch=P=$lin[0]$lin[1]
+	<Item formato="text/html">
+	$URL
 	</Item>
 	<DocumentoIndividual>
 	urn:lex:br;sao.paulo;sao.paulo:municipal:$tipo_urn:$data_iso;$lin[1]
 	</DocumentoIndividual>
 	<Epigrafe>$tipo_ext núm. $num de $lin[2]</Epigrafe>
-	<Ementa>$ementa</Ementa>
+	<Ementa>$ementa</Ementa>$RELACIONAMENTO
 </LexML>
 EOB;
+
 
 	} // if valido
 } // loop file
