@@ -9,7 +9,7 @@ cvs2oaiLexML
   2. configurar e rodar `php isis2oailex.php > metadadosLexML.xml`
   3. enviar para análise ao suporte LeXML ou configurar e rodar o "kit provedor de dados": ver  [lexml-toolkit](https://github.com/lexml/lexml-toolkit), [lexml-coleta-validador](https://github.com/lexml/lexml-coleta-validador) e [seu guia](http://projeto.lexml.gov.br/documentacao/LexML_Brasil-Parte_4a-Kit_Provedor_de_Dados%20v.pdf).
 
-# DECISÔES DE PROJETO EM 2014-06-11 n
+# DECISOES DE PROJETO EM 2014-06-11
 
 AGUARDAR DEFINIÇÕES:
 
