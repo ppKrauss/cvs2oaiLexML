@@ -120,7 +120,7 @@ Os dados do *dump ISIS* de [projetos de norma da Câmara](http://www2.camara.sp.
  RDS    | Requerimento D sem Processo      |   28%
  DOCREC | Documento Recebido               |   10%
 ```
-Desses, apenas os tipos 'PL', 'PDL', 'PLO', 'PR' e 'RDS' apresentam registro de promulgação, ou seja, apenas eles possuem potencial de evoluir como norma efetivamente. 
+Desses, apenas os tipos 'PL', 'PDL', 'PLO', 'PR' e 'RDS' apresentam registro de promulgação, ou seja, apenas eles possuem potencial de evoluir como norma efetivamente.  Na tabela abaixo o percentual de projetos de norma que foram promulgadas em relação ao total de projetos do mesmo tipo:
 
 ```
  tipo | perc 
@@ -132,6 +132,17 @@ Desses, apenas os tipos 'PL', 'PDL', 'PLO', 'PR' e 'RDS' apresentam registro de 
  RDS  |    ~0
 ```
 O tipo RDS (com apenas 1 registro) provavelmente foi alguma falha de cadastro, e entre os demais, os mais usados são  PL e PDL.
+
+Com isso podemos então fazer uma avaliação interessante: o percentual de projetos promulgados, a cada tipo:
+
+```
+ tipo | perc promulgado
+------+------
+ PL   |   28%
+ PDL  |   72%
+ PLO  |   11%
+ PR   |   29%
+```
 
 ----
 
