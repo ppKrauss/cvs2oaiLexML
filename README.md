@@ -36,7 +36,7 @@ Nele foi estabelecido um protocolo para a coleta de metadados de normas jurídic
 
 ## Exemplo ilustrativo 
 
-Apesar do ISIS permitir as mais diversas formas de saída em text/plain, foi escolhida uma variação específica do CSV já usado no "[Programa de Dados Abertos do Parlamento](http://www.camara.sp.gov.br/index.php?option=com_wrapper&view=wrapper&Itemid=219) (vide Portal da Câmara Municipal de São Paulo, seção Transparência/Dados Abertos),  arquivo "Produção Legislativa", descrito em [ARQ_BIBL.TXT](http://www2.camara.sp.gov.br/Dados_abertos/producaoLegislativa/ARQ_BIBL.TXT).
+Apesar do ISIS permitir as mais diversas formas de saída em text/plain, foi escolhida uma variação específica do CSV já usado no "[Programa de Dados Abertos do Parlamento](http://www.camara.sp.gov.br/index.php?option=com_wrapper&view=wrapper&Itemid=219) (vide Portal da Câmara Municipal de São Paulo, seção Transparência/Dados Abertos),  arquivo "Produção Legislativa",  [ARQ_BIBL.TXT](http://www2.camara.sp.gov.br/Dados_abertos/producaoLegislativa/ARQ_BIBL.TXT) (em junho de 2014), [descrito em pdf](http://www2.camara.sp.gov.br/Dados_abertos/producaoLegislativa/Descricao.pdf).
 
 Como esse *dump ISIS* é uma convenção que ainda pode sofrer modificações, podemos avaliar um caso simplificado,
 
@@ -100,6 +100,38 @@ Apenas os seguintes nomes de campo podem ser utilizados na primeira linha:
 
 ## Projetos de Lei
 O LexML, apesar de priorizar as normas, aceita também "projetos de norma". Por exemplo o projeto [PL-2788 (urn:lex:br:camara.deputados:projeto.lei;pl:2011;2788)](http://www.lexml.gov.br/urn/urn:lex:br:camara.deputados:projeto.lei;pl:2011;2788) já devidamente registrado, que deu origem à [Lei 11705 (urn:lex:br:federal:lei:2008;11705)](http://www.lexml.gov.br/urn/urn:lex:br:federal:lei:2008-06-19;11705). Para expresar esse relacionamento, os metadados da Lei 11705 devem incluir uma tag `<Relacionamento tipo="sucessor.logico.de">` com a URN do projeto de lei.
+
+### Perfil dos projetos da Câmara de São Paulo
+
+Os dados do *dump ISIS* de [projetos de norma da Câmara](http://www2.camara.sp.gov.br/Dados_abertos/producaoLegislativa/Descricao.pdf) (o supracitado ARQ_BIBL.TXT do "Dados Abertos") podem ser organizando em tipo, resultando na seguinte distribuição de percentuais,
+      
+```
+  tipo  |               nome               | perc 
+ -------+----------------------------------+-------
+ PL     | Projeto de Lei                   |    9%
+ PDL    | Projeto de Decreto Legislativo   |    1%
+ PLO    | Projeto de Emenda a Lei Orgânica |    ~0
+ PR     | Projeto de Resolução             |    ~0
+ MOC    | Moção                            |    ~0
+ RPP    | Requerimento P com Processo      |    ~0
+ RDP    | Requerimento D com Processo      |    1%
+ IND    | Indicação                        |   46%
+ REC    | Recurso                          |    ~0
+ RDS    | Requerimento D sem Processo      |   28%
+ DOCREC | Documento Recebido               |   10%
+```
+Desses, apenas os tipos 'PL', 'PDL', 'PLO', 'PR' e 'RDS' apresentam registro de promulgação, ou seja, apenas eles possuem potencial de evoluir como norma efetivamente. 
+
+```
+ tipo | perc 
+------+-------
+ PL   | 71.9%
+ PDL  | 24.7%
+ PR   |  2.9%
+ PLO  |  0.3%
+ RDS  |    ~0
+```
+O tipo RDS (com apenas 1 registro) provavelmente foi alguma falha de cadastro, e entre os demais, os mais usados são  PL e PDL.
 
 ----
 
