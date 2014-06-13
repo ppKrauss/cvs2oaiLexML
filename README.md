@@ -136,14 +136,27 @@ O tipo RDS (com apenas 1 registro) provavelmente foi alguma falha de cadastro, e
 Com isso podemos então fazer uma avaliação interessante: o percentual de projetos promulgados, a cada tipo:
 
 ```
- tipo | perc promulgado
-------+------
- PL   |   28%
- PDL  |   72%
- PLO  |   11%
- PR   |   29%
+  tipo | n_prom | n_tot | perc 
+  -----+--------+-------+-------
+  PL   |   4657 | 17291 |   26%
+  PDL  |   1700 |  2284 |   74%
+  PLO  |     23 |   205 |   11%
+  PR   |    191 |   637 |   29%
 ```
 
+Essa "TAXA DE APROVACAO POR TIPO" é um dado interessante, mostra que as PDLs são mais tranquilas de negociar e promulgar, talvez por seu teor mais burocrático, e as PLs e sobretudo as PLOs, mais difíceis de serem negociadas.
+
+Dentre as PLs, se analisarmos as ementas, percebemlos que há talvez como separar aquelas de "teor mais burocrático" daquelas de "teor relevante".
+As *normas de denominação* (selecionadas por restrição do tipo `WHERE ementa ILIKE '%denomina%' AND ementa ILIKE '%logradouro%'`) são um caso típico de "norma menos relevante". 
+Enquanto todas as PLs juntas, em média, apresentam uma taxa de 26% (ver tabela acima), a taxa das PLs de denominação isoladas  salta para 50%(das 1214 PLs de denominação, 581 foram aprovadas).
+
+Ambos resultados (geral por tipo e PLs de denominação) fortalecem uma hipótese de trabalho importante:
+
+   é mais facil aprovar uma "norma inóqua" (caracterizada por seu "teor burcrático") 
+   do que uma norma relevante (caracterizada pelo teor disciplinador e de maior impacto)
+   
+Mesmo sendo uma hipótese de difícil formalização e teste, pode ser adotada como norteador em pesquisas mais informais.   
+   
 ----
 
 # Outros links e referências 
