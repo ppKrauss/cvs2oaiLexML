@@ -152,11 +152,11 @@ Enquanto todas as PLs juntas, em média, apresentam uma taxa de 26% (ver tabela 
 
 Ambos resultados (geral por tipo e PLs de denominação) fortalecem uma hipótese de trabalho importante:
 
-   é mais facil aprovar uma "norma inóqua" (caracterizada por seu "teor burcrático") 
-   do que uma norma relevante (caracterizada pelo teor disciplinador e de maior impacto)
+> é mais facil aprovar uma "norma inóqua" (caracterizada por seu "teor burcrático") 
+> do que uma norma relevante (caracterizada pelo teor disciplinador e de maior impacto)
    
-Mesmo sendo uma hipótese de difícil formalização e teste, pode ser adotada como norteador em pesquisas mais informais.   
-   
+Mesmo sendo uma hipótese de difícil formalização e teste, pode ser adotada como norteador em pesquisas mais informais.
+
 ----
 
 # Outros links e referências 
