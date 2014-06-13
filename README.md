@@ -186,15 +186,24 @@ Exemplos de registro inicial e final dos metadados enviados ao LeXML.
   <Ementa>Dispõe sobre a outorga da Medalha Anchieta e Diploma de Gratidão da 
   Cidade de São Paulo ao Sr. ADAYR MAFUZ SALIBA.</Ementa>
 </LexML>
+
 ...
+
 <LexML xmlns="http://www.lexml.gov.br/">
   <Item formato="application/pdf">
-  http://camaramunicipalsp.qaplaweb.com.br/iah/fulltext/projeto/PLO0001-1992.pdf
+  http://camaramunicipalsp.qaplaweb.com.br/iah/fulltext/projeto/PL0298-2014.pdf
   </Item>
   <DocumentoIndividual>
-  urn:lex:br;sao.paulo;sao.paulo:municipal:projeto.emenda.lei.organica:1992-02-06;1
+  urn:lex:br;sao.paulo;sao.paulo:municipal:projeto.lei:2014-06-05;298
   </DocumentoIndividual>
-peter@lagarto:/var/www/hackdays$ tail metadadosSaoPaulo.xml
+  <Epigrafe>Projeto de Lei núm. 298 de 05/06/2014</Epigrafe>
+  <Ementa>DENOMINA "A PRAÇA É NOSSA" O ESPAÇO PÚBLICO INOMINADO SITUADO COM FRENTE
+  PARA A AVENIDA MINISTRO PETRÔNIO PORTELA, ALTURA DO NUMERAL 17, DIVISANDO NOS 
+  FUNDOS COM O CONDOMÍNIO RESIDENCIAL BELA VISTA, DISTRITO DO MOINHO VELHO, 
+  SUBPREFEITURA DE FREGUESIA/BRASILÂNDIA E DÁ OUTRAS PROVIDÊNCIAS.</Ementa>
+</LexML>
+<LexML xmlns="http://www.lexml.gov.br/">
+  <Item formato="application/pdf">
   http://camaramunicipalsp.qaplaweb.com.br/iah/fulltext/projeto/PL0299-2014.pdf
   </Item>
   <DocumentoIndividual>
