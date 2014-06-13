@@ -157,6 +157,58 @@ Ambos resultados (geral por tipo e PLs de denominação) fortalecem uma hipótes
    
 Mesmo sendo uma hipótese de difícil formalização e teste, pode ser adotada como norteador em pesquisas mais informais.
 
+# Registro dos metadados 
+
+Exemplos de registro inicial e final dos metadados enviados ao LeXML.
+
+```xml
+<LexML xmlns="http://www.lexml.gov.br/">
+  <Item formato="application/pdf">
+  http://camaramunicipalsp.qaplaweb.com.br/iah/fulltext/projeto/PL0001-1992.pdf
+  </Item>
+  <DocumentoIndividual>
+  urn:lex:br;sao.paulo;sao.paulo:municipal:projeto.lei:1992-02-04;1
+  </DocumentoIndividual>
+  <Epigrafe>Projeto de Lei núm. 1 de 04/02/1992</Epigrafe>
+  <Ementa>Dispõe  sobre  a  regularização  dos procedimentos do Poder  Executivo  
+  que redundaram nas obras de reforma do Autódromo de Interlagos e na ampliação 
+  da frota de ônibus   da Companhia  Municipal  de  Trans portes Coletivos CMTC, 
+  e dá outras providências.</Ementa>
+</LexML>
+<LexML xmlns="http://www.lexml.gov.br/">
+  <Item formato="application/pdf">
+  http://camaramunicipalsp.qaplaweb.com.br/iah/fulltext/projeto/PDL0001-1992.pdf
+  </Item>
+  <DocumentoIndividual>
+  urn:lex:br;sao.paulo;sao.paulo:municipal:projeto.decreto;legislativo:1992-02-04;1
+  </DocumentoIndividual>
+  <Epigrafe>Projeto de Decreto Legislativo núm. 1 de 04/02/1992</Epigrafe>
+  <Ementa>Dispõe sobre a outorga da Medalha Anchieta e Diploma de Gratidão da 
+  Cidade de São Paulo ao Sr. ADAYR MAFUZ SALIBA.</Ementa>
+</LexML>
+...
+<LexML xmlns="http://www.lexml.gov.br/">
+  <Item formato="application/pdf">
+  http://camaramunicipalsp.qaplaweb.com.br/iah/fulltext/projeto/PLO0001-1992.pdf
+  </Item>
+  <DocumentoIndividual>
+  urn:lex:br;sao.paulo;sao.paulo:municipal:projeto.emenda.lei.organica:1992-02-06;1
+  </DocumentoIndividual>
+peter@lagarto:/var/www/hackdays$ tail metadadosSaoPaulo.xml
+  http://camaramunicipalsp.qaplaweb.com.br/iah/fulltext/projeto/PL0299-2014.pdf
+  </Item>
+  <DocumentoIndividual>
+  urn:lex:br;sao.paulo;sao.paulo:municipal:projeto.lei:2014-06-05;299
+  </DocumentoIndividual>
+  <Epigrafe>Projeto de Lei núm. 299 de 05/06/2014</Epigrafe>
+  <Ementa>ALTERA A LEI Nº 14.223, DE 26 DE SETEMBRO DE 2006, ACRESCENTANDO §§ 3º E 4º 
+  AO SEU ART. 50, PARA DISPOR SOBRE A CELEBRAÇÃO DO TERMO DE COOPERAÇÃO COM A 
+  INICIATIVA PRIVADA, VISANDO À EXECUÇÃO E MANUTENÇÃO DAS MELHORIAS URBANAS, 
+  AMBIENTAIS E PAISAGÍSTICAS, BEM COMO À CONSERVAÇÃO DE ÁREAS MUNICIPAIS, E DÁ 
+  OUTRAS PROVIDÊNCIAS.</Ementa>
+</LexML>
+```
+
 ----
 
 # Outros links e referências 
