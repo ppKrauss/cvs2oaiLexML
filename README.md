@@ -1,7 +1,7 @@
-cvs2oaiLexML
+csv2oaiLexML
 ============
 
-*"CVS to OAI-LexML"*, conversão de arquivos CSV genéricos (*tabular plain text* independente do separador) para OAI-LexML.
+*"CSV to OAI-LexML"*, conversão de arquivos CSV genéricos (*tabular plain text* independente do separador) para OAI-LexML.
 
 # Sinopse dos procedimentos
 
@@ -25,10 +25,10 @@ SIMPLIFICANDO para não desperdiçar tempo em algo que ainda não sabemos se ser
 
 O [portal LexML](http://www.lexml.gov.br/), conhecido como "Google das normas brasileiras", unifica a busca e o acesso a normas jurídicas brasileiras, e, no mesmo domínio, `lexml.gov.br`, com igual compromisso de persistência e estabilidade, oferece serviços para  resolução de URNs das normas. São mecanismos fundamentais para o acesso, inter-link, relacionamento, comparação, certificação, e dezenas de outros procedimentos relativos ao sistema legislativo.
 
-Os algoritmos descritos a seguir, tem por objetivo garantir a conversão fiel dos metadados das normas jurídicas de um municipio  (Leis, Decretos, Portarias, etc.), quando dispostos em arquivo [tipo CVS](https://en.wikipedia.org/wiki/Comma-separated_values) (com separador flexibilizado e header engessado), para o formato [OAI-LexML](http://projeto.lexml.gov.br/esquemas/oai_lexml.xsd); e, opcionalmente, para uma base de dados passível de ser validada pelo [software do "kit provedor de dados"](http://projeto.lexml.gov.br/documentacao/LexML_Brasil-Parte_4a-Kit_Provedor_de_Dados%20v.pdf).  
+Os algoritmos descritos a seguir, tem por objetivo garantir a conversão fiel dos metadados das normas jurídicas de um municipio  (Leis, Decretos, Portarias, etc.), quando dispostos em arquivo [tipo CSV](https://en.wikipedia.org/wiki/Comma-separated_values) (com separador flexibilizado e header engessado), para o formato [OAI-LexML](http://projeto.lexml.gov.br/esquemas/oai_lexml.xsd); e, opcionalmente, para uma base de dados passível de ser validada pelo [software do "kit provedor de dados"](http://projeto.lexml.gov.br/documentacao/LexML_Brasil-Parte_4a-Kit_Provedor_de_Dados%20v.pdf).  
 
 Historicamente dois exemplos típicos caracterizam o problema em contextos bem distintos:
-* Prefeitura Municipal de Garuva (SC): em 2010 listou em planilha eletrônica (OpenOffice) suas 3.974 leis para então serem gravadas como CVS, e depois convertidas por software e disponibilizadas pelo LexML.
+* Prefeitura Municipal de Garuva (SC): em 2010 listou em planilha eletrônica (OpenOffice) suas 3.974 leis para então serem gravadas como CSV, e depois convertidas por software e disponibilizadas pelo LexML.
 * Câmara Municipal de São Paulo: em 2014 o portal http://www.camara.sp.gov.br passou a gerar e tornar acessíveis os registros completos da sua base de metadados das normas e dos projetos-de-norma do município, quase 200Mb (centenas de milhares de normas). Tendo sua origem num antigo sistema ISIS, a forma mais prática de exportá-los foi o "arquivo tipo CSV". O presente projeto Github foi então concebido para a sua exportação, e aproveitando a experiência de Garuva.
 
 O [projeto LexML](http://projeto.lexml.gov.br/) é uma das mais importantes iniciativas de transparência e interoperabilidade no Brasil.
@@ -76,7 +76,7 @@ Temos aparentemente dois softwares de processamento, um em PHP outro em XSLT1, m
 # Convenções sugeridas e adotadas
 Duas convenções principais foram fixadas, como proposta às prefeituras:
 
-  1. Recuperação de dados brutos do município: através da classe [getcsv_stdOpenGov](https://github.com/ppKrauss/getcsv_stdOpenGov), onde podemos fixar parte das convenções, tais como nomes dos campos relativos aos metadados das normas. Foi requisitado também dispor o CVS em UTF-8 com primeira linha contendo os nomes de campo.
+  1. Recuperação de dados brutos do município: através da classe [getcsv_stdOpenGov](https://github.com/ppKrauss/getcsv_stdOpenGov), onde podemos fixar parte das convenções, tais como nomes dos campos relativos aos metadados das normas. Foi requisitado também dispor o CSV em UTF-8 com primeira linha contendo os nomes de campo.
 
   2. XML intermediário (baseado nos nomes dos campos convencionados no item anterior).
 
